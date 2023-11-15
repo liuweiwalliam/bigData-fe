@@ -1,35 +1,44 @@
-# vue-project
-
-This template should help get you started developing with Vue 3 in Vite.
-
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
+# view-ui-project-vite
+This project build for Vue3, Vue-router, Vuex, ViewUIPlus and Vite.
+## Install
+```shell
 npm install
 ```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
+## Run
+```shell
+npm run serve
 ```
-
-### Compile and Minify for Production
-
-```sh
+## Build
+### Build for Production
+```shell
 npm run build
 ```
+### Build for Staging
+```shell
+npm run build:staging
+```
+## Preview
+### Preview for Production
+```shell
+npm run preview
+```
+### Preview for Staging
+```shell
+npm run preview:staging
+```
+## Run Eslint
+### Run without Fixing
 
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
+- This operation will also run before git-commit.
+```shell
 npm run lint
 ```
+### Run with Fixing
+```shell
+npm run lint:fix
+```
+## .env Description
+
+- This project exposes environment variables on `import.meta.env` object.
+- Different modes (development/staging/production) correspond to different environment files (.env.*).
+- .env file is always included, duplicate variables are overwritten by the specific mode file (.env.*).
