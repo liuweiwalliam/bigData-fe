@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Check from '@/views/check.vue'
-import Monitor from '@/views/monitor.vue'
+import Check from '@/views/check/check.vue'
+import Monitor from '@/views/monitor/monitor.vue'
 import Source from '@/views/source/source.vue'
-import Task from '@/views/task.vue'
+import Task from '@/views/task/task.vue'
 
 const routes = [
   {

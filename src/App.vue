@@ -1,18 +1,20 @@
 <template>
-    head
-  <Menu/>
+  <Header/>
+  <Menu />
   <div class="container">
-    <router-view/>
+    <router-view />
   </div>
 </template>
 
 <script setup>
 import Menu from '@/components/menu'
+import Header from '@/components/header'
 
 </script>
 <style scoped>
-.container{
+.container {
   margin-left: 280px;
-  margin-top: 200px;
+  padding-top: 130px;
+  padding-right: 30px;
 }
 </style>

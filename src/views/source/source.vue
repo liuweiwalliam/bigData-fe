@@ -1,90 +1,74 @@
 <template>
-  <Form
-    ref="formInline"
-    :model="formItem"
-    :rules="ruleInline"
-    inline
-    :label-width="100"
-  >
-    <FormItem prop="user" :label="formItemLabel.name">
-      <Input type="text" v-model="formInline.user" placeholder="Username">
-      </Input>
+  <Form inline ref="formInline" :model="formItem" :label-width="100">
+    <FormItem :label="formItemLabel.name">
+      <Input type="text" v-model="formInline.user"> </Input>
     </FormItem>
-    <FormItem prop="password" :label="formItemLabel.safe">
+    <FormItem :label="formItemLabel.type">
       <Select v-model="formItem.select">
-        <Option value="junior">junior</Option>
-        <Option value="middle">middle</Option>
-        <Option value="shanghai">senior</Option>
-        <Option value="shenzhen">super</Option>
-      </Select>
-    </FormItem>
-    <FormItem prop="password" :label="formItemLabel.type">
-      <Select v-model="formItem.select">
-        <Option value="beijing">全部</Option>
+        <Option value="all">全部</Option>
         <Option value="shanghai">关系型数据库</Option>
-        <Option value="shenzhen">kafka</Option>
+        <Option value="kafka">kafka</Option>
       </Select>
     </FormItem>
     <FormItem>
-      <Button type="primary" @click="handleSubmit('formInline')">搜索</Button>
-      <Button type="primary" @click="handleSubmit('formInline')">重置</Button>
+      <Button class="mr-20" type="primary" @click="search('formInline')"
+        >搜索</Button
+      >
+      <Button type="primary" @click="resetForm('formInline')">重置</Button>
     </FormItem>
   </Form>
-  <div>
-    <Button type="primary" @click="handleSubmit('formInline')">
+  <div class="button-container">
+    <Button type="primary" class="table-button" @click="showCreat">
       创建数据连接
     </Button>
   </div>
-  <TableList />
+  <TableList :formItem="formItem" ref="table" />
+  <Creat :isShow="isShowCreat" @closeCreat="closeCreat" />
 </template>
 
 <script setup>
-import TableList from "./table.vue";
+import {
+  ref, onMounted, getCurrentInstance, reactive
+} from 'vue'
+import TableList from './table.vue'
+import Creat from './creat.vue'
+import lib from '../../lib/lib'
+
+const { proxy } = getCurrentInstance()
+
+const tableList = {}
+function search() {
+  proxy.$refs.table.pullData()
+}
+
+function resetForm() {}
+
+const isShowCreat = ref(false)
 const formItemLabel = {
-  name: "名称",
-  safe: "安全级别",
-  type: "数据库类型",
-};
+  name: '名称',
+  safe: '安全级别',
+  type: '数据库类型',
+}
 const formItem = {
-  name: "name",
-  safe: "1",
-  type: "1",
-};
+  name: 'name',
+  type: '1',
+}
 const formInline = {
-  user: "",
-  password: "",
-};
-const ruleInline = {
-  user: [
-    {
-      required: true,
-      message: "Please fill in the user name",
-      trigger: "blur",
-    },
-  ],
-  password: [
-    {
-      required: true,
-      message: "Please fill in the password.",
-      trigger: "blur",
-    },
-    {
-      type: "string",
-      min: 6,
-      message: "The password length cannot be less than 6 bits",
-      trigger: "blur",
-    },
-  ],
-};
-function handleSubmit(name) {
-  this.$refs[name].validate((valid) => {
-    if (valid) {
-      this.$Message.success("Success!");
-    } else {
-      this.$Message.error("Fail!");
-    }
-  });
+  user: '',
+  password: '',
+}
+
+function showCreat() {
+  console.log(123)
+  isShowCreat.value = true
+  console.log(isShowCreat)
+}
+function closeCreat() {
+  isShowCreat.value = false
+  console.log('closeCreat')
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+@import "../../styles/index.less";
+</style>
